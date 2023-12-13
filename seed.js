@@ -1,8 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://127.0.0.1:27017/books');
-mongoose.connect(process.env.DATABASE_URL);
-console.log(process.env.DATABASE_URL);
+mongoose.connect(process.env.MONGODB_URL);
+
 const Book = require('./src/Models/Book');
 console.log('book model', Book)
 async function seed() {
