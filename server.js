@@ -24,15 +24,21 @@ app.get('/books', async (request, response) => {
 })
 
 app.post('/books', async (request, response) => {
+  try {
+    const { title, description, status } = request.body;
+    const newBook = await Book.create(
+      title,
+      description,
+      status,
+    );
 
-  const newBook = await Book.create(
-    request.body
-  );
-
-  if (!newBook.title || !newBook.description || !newBook.status) {
-    return response.status(400).json({ error: 'Please provide all required fields' });
+    // if (!newBook.title || !newBook.description || !newBook.status) {
+    //   return response.status(400).json({ error: 'Please provide all required fields' });
+    // }
+    response.send(newBook);
+  } catch (error) {
+    console.error('Error creating book:', error);
   }
-  response.send(newBook);
 })
 
 app.listen(PORT, () => console.log('server is listening on port:', PORT))
