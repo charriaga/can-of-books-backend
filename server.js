@@ -41,4 +41,16 @@ app.post('/books', async (request, response) => {
   }
 })
 
+async function deleteBook() {
+  const id = request.params.id;
+  try {
+    await Book.findByIdAndDelete(id)
+    console.log('Success!');
+  } catch(error) {
+    console.log('error with submission');
+  }
+}
+
+app.delete('/books', deleteBook);
+
 app.listen(PORT, () => console.log('server is listening on port:', PORT))
